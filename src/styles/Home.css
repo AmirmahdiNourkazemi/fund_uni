@@ -1,0 +1,17 @@
+.home {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+ 
+  width: 100%;
+  background: #F9F9F9 ;
+  /* background-image: url("../assets/images/homepage.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
+}
+
+.footer { 
+  font-family: 'irms-w600' !important;
+}

@@ -1,0 +1,91 @@
+/* src/styles/Header.css */
+
+.app-header {
+  position: fixed;
+  width: 70%;
+  margin: 10px auto;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  align-items: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 1rem;
+  box-shadow: #e0e0e0;
+  overflow: hidden;
+  z-index: 1000;
+
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+}
+
+.header-left .logo {
+  width: 70px;
+  padding-right: 10px;
+}
+
+.header-left nav a,
+.header-right a {
+  margin: 0 0.5rem;
+  color: #333;
+  font-size: 1rem;
+  font-family: 'irms-w600';
+}
+
+.login-link {
+  padding-left: 10px;
+}
+.menu-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #074EA0;
+ 
+  cursor: pointer;
+  padding-left: 10px;
+}
+
+.menu-icon .bar {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+}
+
+.desktop-menu {
+  display: flex;
+}
+
+@media (max-width: 900px) {
+  
+  .header-right a,
+  .support-link,
+  .login-link,
+  .user-link,
+  .loading-text,
+  .user-button {
+    display: none;
+  }
+  .user-button{
+    display: none;
+  }
+  .app-header {
+    width: 90%;
+    
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+ 
+  .menu-icon {
+    display: flex;
+  }
+}
+

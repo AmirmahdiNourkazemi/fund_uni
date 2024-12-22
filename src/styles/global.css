@@ -1,0 +1,31 @@
+/* src/styles/global.css */
+@font-face {
+  font-family: 'irm';
+  src: url('../assets/fonts/IRANSans_Medium.ttf') format('truetype');
+  
+}
+@font-face {
+  font-family: 'irms';
+  src: url('../assets/fonts/IRANSansXFaNum-Regular.woff');
+}
+@font-face {
+  font-family: 'irms-w600';
+  
+  src: url('../assets/fonts/IRANSansXFaNum-Medium.woff');
+}
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: 'irms', sans-serif;
+}
+
+button:focus {
+  outline: none !important;
+}

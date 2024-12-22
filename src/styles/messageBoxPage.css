@@ -1,0 +1,11 @@
+.MessageBox-page{
+    display: flex;
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 100vh;
+    width: 100%;
+    background: #F9F9F9 ;
+}

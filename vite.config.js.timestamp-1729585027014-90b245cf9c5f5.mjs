@@ -1,0 +1,14 @@
+// vite.config.js
+import { defineConfig } from "file:///C:/Users/Shaghayegh/amirmahdi-app/smart-funding-react.js/node_modules/vite/dist/node/index.js";
+import react from "file:///C:/Users/Shaghayegh/amirmahdi-app/smart-funding-react.js/node_modules/@vitejs/plugin-react/dist/index.mjs";
+var vite_config_default = defineConfig({
+  plugins: [react()]
+  // server: {
+  //   host: '192.168.100.16', // Use your local IP address here
+  //   port: 5173, // Default port, can be changed if needed
+  // }
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCJDOlxcXFxVc2Vyc1xcXFxTaGFnaGF5ZWdoXFxcXGFtaXJtYWhkaS1hcHBcXFxcc21hcnQtZnVuZGluZy1yZWFjdC5qc1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiQzpcXFxcVXNlcnNcXFxcU2hhZ2hheWVnaFxcXFxhbWlybWFoZGktYXBwXFxcXHNtYXJ0LWZ1bmRpbmctcmVhY3QuanNcXFxcdml0ZS5jb25maWcuanNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL0M6L1VzZXJzL1NoYWdoYXllZ2gvYW1pcm1haGRpLWFwcC9zbWFydC1mdW5kaW5nLXJlYWN0LmpzL3ZpdGUuY29uZmlnLmpzXCI7aW1wb3J0IHsgZGVmaW5lQ29uZmlnIH0gZnJvbSAndml0ZSdcclxuaW1wb3J0IHJlYWN0IGZyb20gJ0B2aXRlanMvcGx1Z2luLXJlYWN0J1xyXG5cclxuLy8gaHR0cHM6Ly92aXRlanMuZGV2L2NvbmZpZy9cclxuZXhwb3J0IGRlZmF1bHQgZGVmaW5lQ29uZmlnKHtcclxuICBwbHVnaW5zOiBbcmVhY3QoKV0sXHJcbiAgLy8gc2VydmVyOiB7XHJcbiAgLy8gICBob3N0OiAnMTkyLjE2OC4xMDAuMTYnLCAvLyBVc2UgeW91ciBsb2NhbCBJUCBhZGRyZXNzIGhlcmVcclxuICAvLyAgIHBvcnQ6IDUxNzMsIC8vIERlZmF1bHQgcG9ydCwgY2FuIGJlIGNoYW5nZWQgaWYgbmVlZGVkXHJcbiAgLy8gfVxyXG59KVxyXG4iXSwKICAibWFwcGluZ3MiOiAiO0FBQW9XLFNBQVMsb0JBQW9CO0FBQ2pZLE9BQU8sV0FBVztBQUdsQixJQUFPLHNCQUFRLGFBQWE7QUFBQSxFQUMxQixTQUFTLENBQUMsTUFBTSxDQUFDO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFLbkIsQ0FBQzsiLAogICJuYW1lcyI6IFtdCn0K

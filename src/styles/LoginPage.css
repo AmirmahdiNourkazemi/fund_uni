@@ -1,0 +1,15 @@
+/* src/styles/LoginPage.css */
+
+
+
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  /* background-color: #074EA0 !important; */
+  background: #074EA0 ;
+  
+}

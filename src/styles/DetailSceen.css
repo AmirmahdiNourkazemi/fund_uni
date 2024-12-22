@@ -1,0 +1,38 @@
+.ql-editor{
+direction: rtl !important;
+text-align: right !important;
+font-family: 'irm';
+}
+
+.progress{
+    direction: ltr !important;
+    transform: rotateY(180deg);
+}
+
+
+/* DetailScreen.css */
+.detail-title {
+    font-weight: 600;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .detail-card {
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 1;
+    max-width: 100%;
+  }
+  
+  .react-quill {
+    max-width: 100%;
+    direction: rtl;
+    text-align: right;
+  }
+  
+  .react-quill .ql-container {
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+  
