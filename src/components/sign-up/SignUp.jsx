@@ -12,7 +12,7 @@ import {
   Radio,
 } from '@mui/material';
 import { useNavigate   } from 'react-router-dom';
-import {updateProfile} from '../../api/profile.js';
+import {updateProfile , fetchProfile} from '../../api/profile.js';
 import SnackbarComponent from '../../utils/SnackBar.jsx';
 import Cookies from 'js-cookie';
 import { Siren, Warning, WarningCircle } from '@phosphor-icons/react';
@@ -20,8 +20,8 @@ import ErrorDialog from '../ErrorDialog.jsx';
 
 const SignUp = () => {
   const [nationalCode, setNationalCode] = useState(localStorage.getItem('userNational'));
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [name, setName] = useState('');
+  const [mobile, setMobile] = useState('');
   const [sajamCode, setSajamCode] = useState('');
   const [ibanCode, setIbanCode] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -56,56 +56,30 @@ const SignUp = () => {
 
     // Add fields to profileData only if they are not empty or null
     if (selectedType === 'private') {
-      if (firstName) profileData.first_name = firstName;
-      if (lastName) profileData.last_name = lastName;
+      if (name) profileData.name = name;
     } else {
-      if (companyName) profileData.company_name = companyName;
+      if (companyName) profileData.name = companyName;
     }
   
     if (nationalCode) profileData.national_code = nationalCode;
-    // profileData.email = ''; // replace with actual email input if needed
-    // profileData.type = user.type;
+    if (mobile) profileData.mobile = mobile;
   
-    // Handle trading codes
-    if (sajamCode) {
-      const tradingCodes = [{ code: sajamCode }];
-      // if (sajamCodeID) {
-      //   tradingCodes[0].id = sajamCodeID;
-      // }
-      profileData.trading_codes = tradingCodes;
-    }
-  
-    // Handle bank accounts
-    if (ibanCode) {
-      const bankAccounts = [{ iban: ibanCode }];
-      // if (ibanCodeID) {
-      //   bankAccounts[0].id = ibanCodeID;
-      // }
-      profileData.bank_accounts = bankAccounts;
-    }
-    // const profileData = {
-    //   first_name: selectedType === 'private' ? firstName : '',
-    //   last_name: selectedType === 'private' ? lastName : '',
-    //   company_name: companyName,
-    //   national_code: nationalCode,
-    //   email: '', // replace with actual email input
-    //   type: selectedType === 'private' ? 1 : 2,
-    //   trading_codes: [
-    //     { code: sajamCode }, // replace with actual trading codes if needed
-    //   ],
-    //   bank_accounts: [
-    //     { iban: ibanCode }, // replace with actual IBAN codes if needed
-    //   ],
-    // };
-
     try {
       const result = await updateProfile(profileData);
       setUser(result)
-      Cookies.set('flutter.netCode', result.user.national_code === null ? '' : result.user.national_code, { expires: 1 });
-
-      localStorage.setItem('userFullName', result.user.full_name);
+      Cookies.set(
+              "flutter.netCode",
+              result.user.national_code === null ? "" : result.user.national_code,
+              { sameSite: "strict" }
+            );
+      Cookies.set("flutter.token", result.token, {
+        sameSite: "strict",
+      });
+      Cookies.set("flutter.mobile", result.user.mobile, {
+        sameSite: "strict",
+      });
+      localStorage.setItem('userFullName', result.user.name);
       localStorage.setItem('userMobile', result.user.mobile);
-      localStorage.setItem('userWallet', result.user.wallet);
       navigate('/');
       
     } catch (error) {
@@ -171,10 +145,10 @@ const SignUp = () => {
         {selectedType === 'private' ? (
           <>
             <TextField
-              id="firstName"
-              label="نام"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              id="name"
+              label="نام و نام خانوادگی"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               fullWidth
               size="medium"
               required
@@ -186,22 +160,7 @@ const SignUp = () => {
               }}
               margin="normal"
             />
-            <TextField
-              id="lastName"
-              label="نام خانوادگی"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              fullWidth
-              size="medium"
-              required
-              InputProps={{
-                sx: { fontSize },
-              }}
-              InputLabelProps={{
-                sx: { fontSize },
-              }}
-              margin="normal"
-            />
+           
           </>
         ):<TextField
         id="companyName"
@@ -241,10 +200,7 @@ const SignUp = () => {
           InputLabelProps={{
             sx: { fontSize },
           }}
-          InputProps={{
-            readOnly: true,
-          }}
-          sx={{backgroundColor:'#f2f2f2'}}
+         
           margin="normal"
         /> : 
         <TextField
@@ -266,64 +222,36 @@ const SignUp = () => {
           InputLabelProps={{
             sx: { fontSize },
           }}
-          InputProps={{
-            readOnly: true,
-          }}
-          sx={{backgroundColor:'#f2f2f2'}}
+          
+      
           margin="normal"
         />
 
        } 
         
-        <div>
         <TextField
-          id="sajamCode"
-          label="کد بورسی"
-          value={sajamCode}
-          onChange={(e) => setSajamCode(e.target.value)}
-          fullWidth
-          
-          size="medium"
-    required
-          InputProps={{
-            sx: { fontSize },
-          }}
-          InputLabelProps={{
-            sx: { fontSize },
-          }}
-          margin="normal"
-        />
-        <div style={{display:'flex' , alignItems:'center'}}>
-          <Warning  color='#074EA0'/>
-          <a href="https://profilesejam.csdiran.ir/session" target='_blank' style={{ fontSize , marginRight:'3px' , color:'#074EA0' }}>پیدا کردن کد بورسی</a></div>
-        </div>
-        <TextField
-          id="iban"
-          label="شماره شبا"
-          value={ibanCode}
+          id="mobile"
+          label="شماره موبایل"
+          value={mobile}
           onChange={(e) => {
-            let value =e.target.value
-            if (value.length <= 26) { // Assuming national code should be max 10 characters
-              if (!value.includes('IR')) {
-                value = 'IR' + value;
-              }   
-                setIbanCode(value)
-              }
+            const value = e.target.value;
+            if (value.length <= 11) { // Assuming national code should be max 10 characters
+              setMobile(value);
+            }
           }}
           fullWidth
-          placeholder="---- ---- ---- ---- IR"
           size="medium"
-          required
           inputProps={{
-            style: { textAlign: 'center', fontSize, inputMode: 'numeric' },
+            style: { fontSize, inputMode: 'numeric' ,maxLength:11 },
           }}
+          required
           InputLabelProps={{
             sx: { fontSize },
           }}
           margin="normal"
         />
 
-        <Box my={4}>
+        <Box my={2}>
           <Button
             type="submit"
             variant="contained"

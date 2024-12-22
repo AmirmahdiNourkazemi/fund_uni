@@ -70,6 +70,7 @@ const ProfileScreen = () => {
           getProjects();
      
       } catch (err) {
+        console.log(err);
         if (
           err.message === "Unauthenticated." ||
           err.message === "No token found"
@@ -139,7 +140,7 @@ const ProfileScreen = () => {
             <Box ml={1}>
               <Typography
                 sx={{ fontSize: isMobile ? 12 : 14, fontWeight: "bold" }}
-              >{`${user.full_name}`}</Typography>
+              >{`${user.name}`}</Typography>
             </Box>
           </Box>
           <Button
@@ -199,80 +200,9 @@ const ProfileScreen = () => {
           </Collapse>
           <Divider />
 
-          {user.addresses.length > 0 ? (
-            <>
-             <ListItem button onClick={() => handleExpandClick("address")}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <MapPin size={28} style={{color:'#074EA0' , marginLeft:'4px'}} />
-                  <Typography
-                    style={{
-                      marginLeft: "5px",
-                      fontSize: isMobile ? 12 : 14,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    آدرس سکونت
-                  </Typography>
-                </div>
-                <div>
-                  {expanded.address ? <ExpandLess /> : <ExpandMore />}
-                </div>
-              </div>
-            </ListItem>
-              <Collapse in={expanded.address} timeout="auto" unmountOnExit>
-                <AddressWidget isUserAddress={expanded.address} user={user} />
-              </Collapse>
-              <Divider />
-            </>
-          ) : null}
+          
 
-          {user.bank_accounts.length > 0 ? (
-            <>
-             <ListItem button onClick={() => handleExpandClick("bankAccount")}>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <CreditCard size={28} style={{color:'#074EA0' , marginLeft:'4px'}}/>
-                  <Typography
-                    style={{
-                      marginLeft: "5px",
-                      fontSize: isMobile ? 12 : 14,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    مشخصات حساب
-                  </Typography>
-                </div>
-                <div>
-                  {expanded.bankAccount ? <ExpandLess /> : <ExpandMore />}
-                </div>
-              </div>
-            </ListItem>
-              <Collapse in={expanded.bankAccount} timeout="auto" unmountOnExit>
-                <BankAccountWidget
-                  isBankAccount={expanded.bankAccount}
-                  user={user}
-                />
-              </Collapse>
-              <Divider />
-            </>
-          ) : null}
+          
 
 <ListItem button onClick={handleInvitesClick}>
           <div

@@ -11,11 +11,10 @@ export const loginWithOtp = async (
   let national_code = nationalCode;
 
   try {
-    const response = await axios.post(`${BASE_URL}/auth/login-otp`, {
+    const response = await axios.post(`${BASE_URL}/auth/login`, {
       mobile,
       national_code,
-      referal_code,
-      ...(recaptcha && { "g-recaptcha-response": recaptcha }),
+     
     });
     return response.data;
   } catch (error) {
@@ -23,24 +22,4 @@ export const loginWithOtp = async (
   }
 };
 
-export const checkOtp = async (
-  mobile,
-  nationalCode,
-  token,
-  referal_code = "",
-  recaptcha
-) => {
-  let national_code = nationalCode;
-  try {
-    const response = await axios.post(`${BASE_URL}/auth/check-otp`, {
-      mobile,
-      national_code,
-      token,
-      referal_code,
-      ...(recaptcha && { "g-recaptcha-response": recaptcha }),
-    });
-    return response.data;
-  } catch (error) {
-    throw error.response ? error.response : new Error("Network Error");
-  }
-};
+

@@ -1,6 +1,6 @@
 // src/components/LoginForm.jsx
 import React, { useState, useEffect } from "react";
-import { checkOtp, loginWithOtp } from "../api/auth";
+import { loginWithOtp } from "../api/auth";
 import logo from "../assets/images/logo1.png";
 import { parse } from "persian_util";
 import OTPDialog from "./OTPDialog.jsx";
@@ -68,78 +68,24 @@ const LoginForm = () => {
       const result = await loginWithOtp(
         parse.Fa_To_En(mobile),
         parse.Fa_To_En(nationalCode),
-        uuid,
-        recaptchaToken
+       
       );
       setTempToken(result.token);
-      setOtpDialogOpen(true);
-    } catch (error) {
-      if (error.data.message === "کد ملی وارد شده سجامی نیست") {
-        setCustomErrorMessage();
-        setErrorDialogOpen(true);
-      }
-     
-
-      if (error.status == 423) {
-        setShowCaptcha(true);
-        setSnackbarMessage("لطفا کپچا را تایید کنید");
-        setSnackbarSeverity("warning");
-        setSnackbarOpen(true);
-      } else if (error.status == 429) {
-        setCountdown(60); 
-        setIsButtonDisabled(true); 
-      } else {
-        setError(error.data.message || "Login failed");
-        setSnackbarMessage(error.data.message.toString());
-        setSnackbarSeverity("warning");
-        setSnackbarOpen(true);
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-  const handleRecaptchaChange = (token) => {
-    setRecaptchaToken(token); // Update token with CAPTCHA verification result
-  };
-  const handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setSnackbarOpen(false);
-  };
-
-  const handleOtpSubmit = async (otp, dialogRecaptchaToken) => {
-    setLoading(true);
-    setError("");
-
-    try {
-      setLoading(false);
-      const result = await checkOtp(
-        parse.Fa_To_En(mobile),
-        parse.Fa_To_En(nationalCode),
-        otp,
-        uuid,
-        dialogRecaptchaToken
-      );
-      const expirationTime = new Date(
-        new Date().getTime() + result.expire_minutes * 60 * 1000
-      );
       Cookies.set("flutter.token", result.token, {
-        expires: expirationTime,
         sameSite: "strict",
       });
       Cookies.set(
         "flutter.netCode",
         result.user.national_code === null ? "" : result.user.national_code,
-        { expires: expirationTime, sameSite: "strict" }
+        { sameSite: "strict" }
       );
       Cookies.set("flutter.mobile", result.user.mobile, {
-        expires: expirationTime,
+       
         sameSite: "strict",
       });
       localStorage.setItem(
         "userFullName",
-        result.user.full_name === null ? "" : result.user.full_name
+        result.user.name === null ? "" : result.user.name
       );
       localStorage.setItem(
         "userMobile",
@@ -153,46 +99,31 @@ const LoginForm = () => {
         "userWallet",
         result.user.wallet === null ? "" : result.user.wallet
       );
-      navigate(from);
+      
     } catch (error) {
       if (error.data.message === "کد ملی وارد شده سجامی نیست") {
         setCustomErrorMessage();
         setErrorDialogOpen(true);
       }
-    
-     else if (error.status === 429) {
-        // Handle "Too Many Requests" by setting a 60-second countdown
-        setOtpCountdown(60); 
-        setIsOtpDisabled(true); // Disable OTP input
-  
-        const timer = setInterval(() => {
-          setOtpCountdown((prevCountdown) => {
-            if (prevCountdown <= 1) {
-              clearInterval(timer);
-              setIsOtpDisabled(false); // Re-enable OTP input
-              return 0;
-            }
-            return prevCountdown - 1;
-          });
-        }, 1000);
-      }
-      else if (error.status == 423) {
-        setDialogShowCaptch(true);
-        setSnackbarMessage("لطفا کپچا را تایید کنید");
+       else {
+        setError(error.data.message || "Login failed");
+        setSnackbarMessage(error.data.message.toString());
         setSnackbarSeverity("warning");
         setSnackbarOpen(true);
       }
-     else {
-      setError(error.data.message || "OTP verification failed");
-      setSnackbarMessage(error.data.message.toString());
-      setSnackbarSeverity("warning");
-      setSnackbarOpen(true);
-     }
     } finally {
       setLoading(false);
-      // setOtpDialogOpen(false);
     }
   };
+ 
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
+  
 
   const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -258,18 +189,7 @@ const LoginForm = () => {
             margin="normal"
           />
 
-          {showCaptcha && (
-            <Box
-              mt={2}
-              mb={2}
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
-              <ReCAPTCHA
-                sitekey={captchaSiteKey} // Replace with your Google reCAPTCHA site key
-                onChange={handleRecaptchaChange}
-              />
-            </Box>
-          )}
+          
           <Box mt={2} mb={2}>
             <Button
               type="submit"
@@ -287,17 +207,21 @@ const LoginForm = () => {
                 "ورود"
               )}
             </Button>
+            <Box mt={2} mb={2}>
+            <Button
+              onClick={() => navigate("/signup")}
+              variant="outlined"
+              color="primary"
+              fullWidth
+              sx={{ height: "45px", fontSize: isMobile ? "12px" : "14px" }}
+              disabled={loading || isButtonDisabled} // Disable button during loading or countdown
+            >
+            <Typography >ثبت نام</Typography>
+            </Button>
+            </Box>
           </Box>
         </form>
-        <OTPDialog
-          isOpen={otpDialogOpen}
-          onRequestClose={() => setOtpDialogOpen(false)}
-          onSubmit={handleOtpSubmit}
-          sx={{ zIndex: 1300 }}
-          showCaptcha={dialogShowCaptch}
-          otpCountdown={otpCountdown}
-          isOtpDisabled={isOtpDisabled}
-        />
+       
         <ErrorDialog
           isOpen={errorDialogOpen}
           onRequestClose={() => setErrorDialogOpen(false)}

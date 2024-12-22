@@ -64,7 +64,7 @@ const ProjectDashboardContainer = ({ project }) => {
         <Divider />
         <div style={{ margin: '10px 0', display: 'flex', justifyContent: 'space-between' }}>
           <Typography sx={{fontSize:isMobile ? "12px" : "14px" , color:'GrayText'}}>پیش بینی سود سالیانه:</Typography>
-          <Typography sx={{fontSize:isMobile ? "12px" : "14px" , color:'GrayText'}}>{En_To_Fa(project.expected_profit)}%</Typography>
+          <Typography sx={{fontSize:isMobile ? "12px" : "14px" , color:'GrayText'}}>{En_To_Fa(project.expected_profit.toString())}%</Typography>
         </div>
         
         <Divider />

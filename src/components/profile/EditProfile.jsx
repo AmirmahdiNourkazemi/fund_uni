@@ -23,8 +23,6 @@ import Cookies from 'js-cookie';
 import ShareWidget from './ShareWidget.jsx';
 import { En_To_Fa, Add_Commas, Fa_To_En } from 'persian_util/build/parser';
 import userLogo from '../../assets/images/user.png'
-import InviteWidget from './InviteWidget.jsx';
-import ForceUpdateWidget from './forceUpdateWidget.jsx'; 
 import { Update } from '@mui/icons-material';
 import ErrorDialog from '../ErrorDialog.jsx';
 import { Warning } from '@phosphor-icons/react';
@@ -57,8 +55,8 @@ const ProfileScreen = () => {
       try {
         const userProfile = await fetchUserProfile();
         setUser(userProfile);
-        setSelectedType(userProfile.type === 1 ? 'private' : 'legal');
-        if(userProfile.type === 1) {
+        setSelectedType(userProfile.type === 0 ? 'private' : 'legal');
+        if(userProfile.type === 0) {
           setNationalCode(userProfile.national_code || '');
           setFirstName(userProfile.private_person_info.first_name || '');
           setLastName(userProfile.private_person_info.last_name || '');
