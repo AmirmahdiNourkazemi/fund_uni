@@ -249,7 +249,7 @@ const TopContainer = ({ project, width, bool  , uuidInvite = null}) => {
                     fontSize: isMobile ? "12px" : "14px",
                   }}
                 >
-                  {En_To_Fa(project.expected_profit)}
+                  {En_To_Fa(project.expected_profit.toString())}
                 </Typography>
                 <Typography
                   style={{

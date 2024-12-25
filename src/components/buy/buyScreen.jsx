@@ -339,8 +339,8 @@ const BuyScreen = () => {
               <Typography sx={{ fontSize, color: "GrayText", pl: 0.6 }}>
                 {parse.Add_Commas(
                   leftOverInvest(
-                    parseInt(project.fund_needed, 10),
-                    parseInt(project.fund_achieved, 10)
+                    parseInt(project.fund_needed , 10),
+                    parseInt(project.fund_achieved == null ?  0 : project.fund_achieved, 10)
                   ).toFixed(0)
                 )}
               </Typography>

@@ -27,10 +27,8 @@ import { fetchUserProfile } from "../../api/profile.js";
 import TimeLine from "./TimeLine.jsx";
 import CalculatorWidget from "./CalculatorContainer.jsx";
 import CalculatorContainer from "./CalculatorContainer.jsx";
-import AttachmentsContainer from "./AttachmentsContainer";
 import BuildCommentWidget from "./commentContainer.jsx";
 import Cookies from "js-cookie";
-import Inviter from "./Inviters.jsx";
 import Warranty from "./warranty.jsx";
 
 const DetailScreen = ({ scrollController }) => {
@@ -88,7 +86,6 @@ const DetailScreen = ({ scrollController }) => {
   }
   const quillDelta = new Delta(JSON.parse(project.description));
   return (
-
     <Container maxWidth="lg" style={{ overflowX: "hidden" }}>
       <Grid container spacing={3} sx={{ marginTop: isMobile ? "25%" : "7%" }}>
         {isMobile ? (
@@ -123,13 +120,21 @@ const DetailScreen = ({ scrollController }) => {
               </Card>
             </Grid>
             <Grid item xs={12}>
-              <TopContainer project={project} bool={show} uuidInvite={uuidInvite}/>
+              <TopContainer
+                project={project}
+                bool={show}
+                uuidInvite={uuidInvite}
+              />
             </Grid>
           </>
         ) : (
           <>
             <Grid item xs={12} md={4}>
-              <TopContainer project={project} bool={show} uuidInvite={uuidInvite}/>
+              <TopContainer
+                project={project}
+                bool={show}
+                uuidInvite={uuidInvite}
+              />
             </Grid>
             <Grid item xs={12} md={8}>
               <Card sx={{ borderRadius: 3 }}>
@@ -216,16 +221,13 @@ const DetailScreen = ({ scrollController }) => {
                   <Typography className="detail-title">ضمانت نامه</Typography>
                   <Warranty warranty={project.warranty} />
                 </>
-              )
-
-              }
+              )}
               <Typography className="detail-title">محاسبه گر</Typography>
               <CalculatorContainer
                 project={project}
                 width="100%"
                 height="auto"
               />
-              <Inviter projectUuid={project.uuid} project={project} />
             </Grid>
           </>
         ) : (
@@ -242,14 +244,12 @@ const DetailScreen = ({ scrollController }) => {
               >
                 {project.warranty && (
                   <>
-                   <Typography className="detail-title" sx={{ my: 2 }}>
-                ضمانت نامه
-              </Typography>
-                <Warranty warranty={project.warranty} />
+                    <Typography className="detail-title" sx={{ my: 2 }}>
+                      ضمانت نامه
+                    </Typography>
+                    <Warranty warranty={project.warranty} />
                   </>
-                )
-
-                }
+                )}
                 {project.time_table && project.time_table.length > 0 && (
                   <>
                     <Typography className="detail-title" sx={{ my: 2 }}>
@@ -258,7 +258,7 @@ const DetailScreen = ({ scrollController }) => {
                     <TimeLine project={project} />
                   </>
                 )}
-                
+
                 <Typography className="detail-title" sx={{ my: 2 }}>
                   محاسبه گر
                 </Typography>
@@ -267,7 +267,6 @@ const DetailScreen = ({ scrollController }) => {
                   width="100%"
                   height="auto"
                 />
-                <Inviter projectUuid={project.uuid} project={project} />
               </div>
             </Grid>
             <Grid item xs={12} md={8} sx={{ marginBottom: "10px" }}>
@@ -298,21 +297,14 @@ const DetailScreen = ({ scrollController }) => {
                   </a>
                 </Button>
               </Card>
-              {show ? (
-                <AttachmentsContainer attachments={project.attachments} />
-              ) : null}
+
               {show && name ? <BuildCommentWidget project={project} /> : null}
             </Grid>
           </>
         )}
       </Grid>
       {isMobile && (
-        <>
-          {show ? (
-            <AttachmentsContainer attachments={project.attachments} />
-          ) : null}
-          {show && name ? <BuildCommentWidget project={project} /> : null}
-        </>
+        <>{show && name ? <BuildCommentWidget project={project} /> : null}</>
       )}
 
       <Box sx={{ height: 90 }} />

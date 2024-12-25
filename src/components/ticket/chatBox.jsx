@@ -132,7 +132,7 @@ const ChatBox = () => {
     <Container>
       <Box mt={12} mb={2}>
         <Paper elevation={1} style={{ padding: "16px" }}>
-          <Typography sx={{ fontSize }}>{ticket.user.full_name}</Typography>
+          <Typography sx={{ fontSize }}>{ticket.user.name}</Typography>
           <Typography sx={{ fontSize, mt: 1 }}>
             موضوع: {ticket.title}
           </Typography>
@@ -151,7 +151,7 @@ const ChatBox = () => {
             <ListItemText
               primaryTypographyProps={{ fontSize }}
               secondaryTypographyProps={{ fontSize, mt: 2 }}
-              primary={msg.user ? `${msg.user.full_name}` : "ناشناس"}
+              primary={msg.user ? `${msg.user.name}` : "ناشناس"}
               secondary={`پیام: ${msg.text}`}
             />
             <Typography sx={{ fontSize }}>
