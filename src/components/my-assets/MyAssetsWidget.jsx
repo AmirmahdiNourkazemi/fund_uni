@@ -75,30 +75,8 @@ const MyAssets = () => {
 
   return (
     <Container style={{padding:isMobile ?'0 0px': '0 90px'}}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop:'0px'}}>
-        <Container sx={{   textAlign: 'center',
-    padding: '20px',
- 
-    borderRadius: '8px',
-    flex: 1,
-    maxWidth: '300px',backgroundColor:'white' }} >
-          <img src={SaveMoneyImg} alt="Save Money" style={{ height: '60px', marginBottom: '10px' }} />
-          <Typography sx={{fontSize}}>{En_To_Fa(Add_Commas(totalReceived.toFixed(0)))} تومان</Typography>
-          <Typography sx={{fontSize}}>مجموع دریافتی های من</Typography>
-        </Container>
-        <Box sx={{width:10}}></Box>
-        <Container sx={{   textAlign: 'center',
-    padding: '20px',
    
-    borderRadius: '8px',
-    flex: 1,
-    maxWidth: '300px',backgroundColor:'white'}}>
-          <img src={SalaryImg} alt="Salary" style={{ height: '60px', marginBottom: '10px' }} />
-          <Typography sx={{fontSize}}>{En_To_Fa(Add_Commas(totalInvestments.toFixed(0))) } تومان</Typography>
-          <Typography sx={{fontSize}}>مجموع سرمایه گذاری های من</Typography>
-        </Container>
-      </Box>
-      <Typography  style={{ marginTop: '20px', marginRight:'10px'}}>سرمایه گذاری ها</Typography>
+      <Typography  style={{  margin:'0 auto' }}>سرمایه گذاری ها</Typography>
       <Container>
         {profile.projects.map((project, index) => (
           // <Typography> {project.title} </Typography>
