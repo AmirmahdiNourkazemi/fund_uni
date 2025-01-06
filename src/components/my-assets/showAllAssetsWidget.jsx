@@ -100,11 +100,7 @@ const ShowAllAssetsWidget = ({ unit }) => {
           >
             {unit.title}
           </Typography>
-          {isExpanded ? (
-            <CaretDown size={20} weight="regular" color="#074EA0" />
-          ) : (
-            <CaretLeft size={20} weight="regular" color="#074EA0" />
-          )}
+          
         </div>
 
         <div
@@ -147,95 +143,43 @@ const ShowAllAssetsWidget = ({ unit }) => {
         }}
       >
         <Typography sx={{ fontSize, color: "GrayText" }}>
-          تعداد تراکنش ها
+          تاریخ سرمایه گذاری
         </Typography>
         <Typography sx={{ fontSize, color: "GrayText" }}>
-          {En_To_Fa(unit.transactions.length.toString())} تراکنش
+          {JalaliDateConverter({isoDate: unit.created_at})} 
         </Typography>
       </div>
-
       <Divider sx={{ m: 1.5, opacity: 0.5 }} />
-      {Array.isArray(unit.transactions) &&
-        unit.transactions.some((transaction) => transaction.type === 3) && (
-          <>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography sx={{ fontSize, color: "GrayText" }}>
-                مجموع سود واریزی
-              </Typography>
-              <Typography sx={{ fontSize, color: "GrayText" }}>
-                <>
-                  {Add_Commas(
-                    unit.transactions.reduce((sum, transaction) => {
-                      return transaction.type === 3
-                        ? sum + transaction.amount
-                        : sum;
-                    }, 0)
-                  )}
-                  <span> تومان</span>
-                </>
-              </Typography>
-            </div>
-            <Divider sx={{ m: 1.5, opacity: 0.5 }} />
-          </>
-        )}
-      <Collapse in={isExpanded} timeout="auto" unmountOnExit>
-        <Box sx={{ mt: 1 }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginBottom: "10px",
-            }}
-          >
-            {/* <Receipt color="#074EA0" size={22} sx={{ fontSize  }} />
-         <Typography
-            sx={{ fontSize, color: "#074EA0", textAlign: "start", ml:1 }}
-          >
-            جزئیات تراکنش
-          </Typography> */}
-          </div>
-
-          <Box sx={{ overflowY: "auto" }}>
-            {unit.transactions.map((transaction, index) => (
-              <TransactionItem
-                key={index}
-                transaction={transaction}
-                index={index}
-                isLast={index === unit.transactions.length - 1}
-              />
-            ))}
-          </Box>
-        </Box>
-      </Collapse>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
         }}
       >
-        <Button 
-        fullWidth = {isMobile ? true : false}
-        variant="outlined" onClick={toggleExpanded} sx={{ fontSize }}>
-          {isExpanded ? "بستن تراکنش ها" : "مشاهده تراکنش ها"}
-        </Button>
-        <Button
-         fullWidth = {isMobile ? true : false}
-          variant="outlined"
-          onClick={handleViewCertificate}
-          sx={{ fontSize }}
-          style={{ marginRight: "10px" }}
-        >
-          {loading ? <CircularProgress size={24} /> : "مشاهده گواهی"}
-        </Button>
+        <Typography sx={{ fontSize, color: "GrayText" }}>
+         سود مورد انتظار
+        </Typography>
+        <Typography sx={{ fontSize, color: "GrayText" }}>
+          {unit.expected_profit} درصد 
+        </Typography>
+      </div>
+      <Divider sx={{ m: 1.5, opacity: 0.5 }} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography sx={{ fontSize, color: "GrayText" }}>
+        تاریخ شروع پروژه
+        </Typography>
+        <Typography sx={{ fontSize, color: "GrayText" }}>
+          {JalaliDateConverter({isoDate: unit.finish_at})} 
+        </Typography>
       </div>
 
       <div

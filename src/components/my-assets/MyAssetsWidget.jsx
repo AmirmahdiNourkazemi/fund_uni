@@ -17,6 +17,7 @@ const MyAssets = () => {
       try {
         const profile = await fetchUser();
         setProfileState({ loading: false, profile, error: null });
+        console.log(profile);
       } catch (error) {
         if (error.message === 'Unauthenticated.' || error.message === 'No token found') {
           navigate('/login',{ state: { from: '/myassets' } });
@@ -62,19 +63,19 @@ const MyAssets = () => {
   let totalInvestments = 0;
   let totalReceived = 0;
 
-  profile.projects.forEach(project => {
-    project.transactions.forEach(transaction => {
-      if (transaction.type === 1) {
-        totalInvestments += transaction.amount;
-      } else if ([2, 3, 4, 6].includes(transaction.type)) {
-        totalReceived += transaction.amount;
-      }
-    });
-  });
+  // profile.projects.forEach(project => {
+  //   project.transactions.forEach(transaction => {
+  //     if (transaction.type === 1) {
+  //       totalInvestments += transaction.amount;
+  //     } else if ([2, 3, 4, 6].includes(transaction.type)) {
+  //       totalReceived += transaction.amount;
+  //     }
+  //   });
+  // });
 
   return (
     <Container style={{padding:isMobile ?'0 0px': '0 90px'}}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop:'100px'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop:'0px'}}>
         <Container sx={{   textAlign: 'center',
     padding: '20px',
  
@@ -100,6 +101,7 @@ const MyAssets = () => {
       <Typography  style={{ marginTop: '20px', marginRight:'10px'}}>سرمایه گذاری ها</Typography>
       <Container>
         {profile.projects.map((project, index) => (
+          // <Typography> {project.title} </Typography>
           <ShowAllAssetsWidget key={index} unit={project} user={profile.user} />
         ))}
       </Container>

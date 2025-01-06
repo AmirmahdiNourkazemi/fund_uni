@@ -99,7 +99,7 @@ const LoginForm = () => {
         "userWallet",
         result.user.wallet === null ? "" : result.user.wallet
       );
-      
+      navigate("/")
     } catch (error) {
       if (error.data.message === "کد ملی وارد شده سجامی نیست") {
         setCustomErrorMessage();
