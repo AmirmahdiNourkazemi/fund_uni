@@ -49,9 +49,9 @@ const SignUp = () => {
     const profileData = {};
 
     if(selectedType === 'private'){
-      profileData.type = 1;
+      profileData.type = true;
     }else  {
-      profileData.type = 2;
+      profileData.type = false;
     }
 
     // Add fields to profileData only if they are not empty or null

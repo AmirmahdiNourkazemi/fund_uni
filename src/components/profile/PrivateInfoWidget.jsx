@@ -12,7 +12,7 @@ const PrivateInfoWidget = ({ isUserPrivate, user }) => {
     <Collapse in={isUserPrivate} timeout="auto" unmountOnExit>
       <Box pl={4} pr={4} pb={2}>
         <Typography sx={{fontSize:isMobile ? 12 : 14 , color:'GrayText'}} gutterBottom>
-          نام و نام خانوادگی: {user.full_name}
+          نام و نام خانوادگی: {user.name}
         </Typography>
         <Typography sx={{fontSize:isMobile ? 12 : 14 ,color:'GrayText'}} gutterBottom>
           شماره موبایل: {En_To_Fa(user.mobile)}

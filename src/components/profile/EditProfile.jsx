@@ -61,7 +61,7 @@ const ProfileScreen = () => {
           setFirstName(userProfile.private_person_info.first_name || '');
           setLastName(userProfile.private_person_info.last_name || '');
         }else { 
-          setCompanyName(userProfile.full_name || '');
+          setCompanyName(userProfile.name || '');
         }
         setMobile(userProfile.mobile || '');
         setNationalCode(userProfile.national_code || '');
@@ -121,7 +121,7 @@ const ProfileScreen = () => {
   
     try {
       const result = await updateProfile(profileData);
-      localStorage.setItem('userFullName', result.user.full_name);
+      localStorage.setItem('userFullName', result.user.name);
       localStorage.setItem('userWallet', result.user.wallet);
       setSnackbarMessage('اطلاعات ویرایش شد!');
       setSnackbarSeverity('success');

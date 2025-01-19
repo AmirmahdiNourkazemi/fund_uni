@@ -123,7 +123,7 @@ const WithdrawScreen = ({}) => {
           <Box sx={{ p:2, mb:1 , borderRadius:'10px'}}>
           <div style={{display:'flex' , flexDirection:'row' , justifyContent:'space-between'}}>
          <Typography sx={{  fontSize }}>نام و نام خوانوادگی </Typography>
-         <Typography sx={{  fontSize }}>{profile.full_name} </Typography>
+         <Typography sx={{  fontSize }}>{profile.name} </Typography>
          </div>
          <Divider sx={{my:1.5}}/>
           <div style={{display:'flex' , flexDirection:'row' , justifyContent:'space-between'}}>

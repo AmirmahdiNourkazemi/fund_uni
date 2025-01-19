@@ -204,7 +204,7 @@ const BuildCommentWidget = ({ }) => {
                       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'space-between' }} sx={{ fontSize }}>
 
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                          <Typography component="span" sx={{ fontSize , textOverflow: "ellipsis", overflow: "hidden"  }}>{comment.user.full_name}</Typography>
+                          <Typography component="span" sx={{ fontSize , textOverflow: "ellipsis", overflow: "hidden"  }}>{comment.user.name}</Typography>
                         </div>
                         <Typography component="span" sx={{ fontSize, justifyContent: 'start', display: 'flex', flexDirection: 'row' }}>{comment.body}</Typography>
                       </div>
@@ -224,7 +224,7 @@ const BuildCommentWidget = ({ }) => {
                        <ListItemText >
                    <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column', alignContent:'space-between',width:'100%'}}>
                    <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignContent:'space-between',width:'100%'}}>
-                        <Typography component="span" sx={{ fontSize }}>{reply.user.full_name}</Typography>
+                        <Typography component="span" sx={{ fontSize }}>{reply.user.name}</Typography>
                        
                        <Typography sx={{ fontSize}}> <JalaliDateConverter isoDate={reply.created_at} /> </Typography>
                         </div>
